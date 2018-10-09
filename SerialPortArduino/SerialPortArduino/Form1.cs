@@ -64,13 +64,15 @@ namespace SerialPortArduino
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
-            byte[] buffer = new byte[sp.BytesToRead];
-            Console.WriteLine("data received {0} bytes", sp.BytesToRead);
-            sp.Read(buffer, 0, sp.BytesToRead);
-            string v = System.Text.Encoding.ASCII.GetString(buffer);
-            Console.WriteLine(v);
-            textBox1.Text += v;
-            
+            //byte[] buffer = new byte[sp.BytesToRead];
+            //Console.WriteLine("data received {0} bytes", sp.BytesToRead);
+            //sp.Read(buffer, 0, sp.BytesToRead);
+            //string v = System.Text.Encoding.ASCII.GetString(buffer);
+            //Console.WriteLine(v);
+            //textBox1.Text += v;
+            string s = sp.ReadExisting();
+            Console.WriteLine(s);
+            textBox1.Invoke(myDelegate, s);
 
         }
 
